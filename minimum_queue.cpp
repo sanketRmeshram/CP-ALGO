@@ -22,7 +22,7 @@ typedef priority_queue <ll> max_heap;
 typedef priority_queue <ll, vector<ll>, greater<ll> > min_heap;
 const ll N=5000+20;
 
-struct my_q_min
+struct minimum_queue
 {
 	stack < pair<ll,ll> > s1,s2;
 
@@ -66,12 +66,13 @@ struct my_q_min
 		return remove_element;
 	}
 };
+typedef struct minimum_queue minimum_queue;
 
 int main()
 {
 	boost;
 	std::vector<ll> v={4,12,-3,-10,49,-100};
-	struct my_q_min qe;
+	minimum_queue qe;
 	ll i=0;
 	while(1)
 	{
