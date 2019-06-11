@@ -12,20 +12,24 @@ using namespace std;
 //#define endl '\n'  
 typedef  long long ll; 
 typedef  unsigned long long ull; 
-typedef vector< ll > edge; 
-typedef pair< ll , ll > mypair;
+typedef pair< string , string > mypair;
 typedef priority_queue <ll> max_heap;
 typedef priority_queue <ll, vector<ll>, greater<ll> > min_heap;
- ll mod=1e9+7;
-const ll inf=1e15+10;
-const ll N=3e6;
-
+const ll mod=1e9+7;
+const ll inf=1e15;
+const ll N=3e5+10;
 struct matrix
 {
 	vector<vector<ll> > mat;
+	matrix(ll a,ll b, ll initial)
+	{
+		vector<vector<ll> >  temp(a,vector<ll> (b,initial));
+		mat=temp;
+	}
 	void resize(ll a,ll b, ll initial)
 	{
-		mat.resize(a,vector<ll> (b,initial));
+		vector<vector<ll> >  temp(a,vector<ll> (b,initial));
+		mat=temp;
 	}
 	void identity()
 	{
@@ -42,11 +46,11 @@ struct matrix
 	}
 	matrix operator + ( matrix & b)  const
 	{
-		matrix temp;
+		
 		ll ro,co;
 		ro=b.get_rows();
 		co=b.get_cols();
-		temp.resize(ro,co,0);
+		matrix temp(ro,co,0);
 		for(ll i=0;i<ro;i++)  
 		{
 			for(ll j=0;j<co;j++)
@@ -60,20 +64,21 @@ struct matrix
 	}
 	matrix operator * ( matrix & b)  const
 	{
-		matrix temp;
+		
 		ll ro,co;
 		ro=mat.size();
 		co=b.get_cols();
 		ll mi=b.get_rows();
-		temp.resize(ro,co,0);
+		matrix temp(ro,co,0);
 		for(ll i=0;i<ro;i++)  
 		{
 			for(ll j=0;j<co;j++)
 			{
+				temp.mat[i][j]=0;
 				for(ll k=0;k<mi;k++)
 				{
 					//temp.mat[i][j]+=mat[i][k]*b.mat[k][j];
-					temp.mat[i][j]+=((mat[i][k]%mod) * (b.mat[k][j]%mod));
+					temp.mat[i][j]+=(((mat[i][k]%mod) * (b.mat[k][j]%mod))%mod);
 					temp.mat[i][j]%=mod;
 				}
 			}
@@ -95,11 +100,11 @@ struct matrix
 
 matrix power(matrix a,ll b)
 {
-	matrix ans;
-	ans.resize(a.get_rows(),a.get_cols(),0);
+	matrix ans(a.get_rows(),a.get_cols(),0);
 	ans.identity();
 	while(b)
 	{
+		
 		if(b & (ll)1)
 		{
 			ans=ans*a;
@@ -109,39 +114,10 @@ matrix power(matrix a,ll b)
 	}
 	return ans;
 }
+
 int main()
 {
-	// problem : https://atcoder.jp/contests/abc129/tasks/abc129_f
-	// my solution  :  https://atcoder.jp/contests/abc129/submissions/5862012
- 	boost;
-	ll l,a,b,m;
-	cin>>l>>a>>b>>m;
-	mod=m;
-	ll lo,hi;
-	matrix ans;
-	ans.resize(1,3,0);
-	ans.mat[0][0]=a%mod;
-	ans.mat[0][1]=(a+b)%mod;
-	ans.mat[0][2]=1;
-	ll term =1,d=10;
-	while(term<l)
-	{
-		lo=max((ll)0,((d/10-1)-a)/b);
-		hi=min(l-1,max((d-1-a)/b,(ll)0));
-		term+=hi-lo;
-		ll now=hi-lo;
-		matrix temp;
-		temp.resize(3,3,0);
-		temp.mat[0][0]=d%mod;
-		temp.mat[1][0]=1;
-		temp.mat[1][1]=1;
-		temp.mat[2][1]=b%mod;
-		temp.mat[2][2]=1;
-		temp=power(temp,now);
-		ans=ans*temp;
-		d*=10;
-		//check(term);check(hi);check(lo);
-	}
-	cout<<ans.mat[0][0];
+	boost;
+	// http://fusharblog.com/solving-linear-recurrence-for-programming-contest/?fbclid=IwAR2ku0FHxHJG9BsZIlVqQiseewnnwOzXYTVE0Sl5RBI5EPq1rwQ6VYEcpOI
   	return 0;
 }  
