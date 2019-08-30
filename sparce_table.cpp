@@ -34,7 +34,7 @@ struct sparce_table
 	} 
 	int operation(int x,int y)
 	{
-		return max(x,y);
+		return min(x,y);
 	}
 	void build()
 	{
