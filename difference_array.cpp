@@ -27,7 +27,7 @@ struct difference_array
 	void init(vector<int> b)
 	{
 		a=b;
-		int n=a.size();
+		n=a.size();
 		
 	}
 	void build()
