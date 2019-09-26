@@ -31,7 +31,7 @@ ll mod_expo(ll a,ll b, ll c)
 	}
 	return ans;
 }
-ll invese(ll n)
+ll inverse(ll n)
 {
 	return mod_expo(n,mod-2,mod);
 }
