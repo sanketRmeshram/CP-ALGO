@@ -27,7 +27,6 @@ struct segment_tree
 	ll t[4*N],lazy[4*N];
 	segment_tree()
 	{
-		cout<<"hello"<<endl;
 		memset(lazy,0,sizeof(lazy));
 	}
 
