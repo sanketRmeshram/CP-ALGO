@@ -69,10 +69,10 @@ struct segment_tree
 			return;
 
 		}  
-        	int tm = (tl + tr) / 2;
-       		update(v*2, tl, tm, l, min(r, tm), addend);
-        	update(v*2+1, tm+1, tr, max(l, tm+1), r, addend);
-        	t[v] = t[v*2] + t[v*2+1];    
+        int tm = (tl + tr) / 2;
+        update(v*2, tl, tm, l, min(r, tm), addend);
+        update(v*2+1, tm+1, tr, max(l, tm+1), r, addend);
+        t[v] = t[v*2] + t[v*2+1];    
 	}
 	void build()
 	{
@@ -88,6 +88,7 @@ struct segment_tree
 	}
 	
 };
+
 
 
 int main()
