@@ -25,7 +25,9 @@ struct segment_tree
 		a=b;
 		n=a.size();
 		data temp;
-		temp.initiate(0);
+		/*
+			intiate your data here if you want to 
+		*/
 		t.assign(4*(n+10),temp);
 		
 	}
