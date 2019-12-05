@@ -52,6 +52,13 @@ struct sparce_table
 		int k=log2(R-L+1);
 		return operation(table[L][k],table[R-(1<<k)+1][k]);
 	}
+	int query_log(int L,int R)
+	{
+		
+		int k=log2(R-L+1);
+		if((R-L+1)==(1<<k)) return table[L][k];
+		return operation(table[L][k],query_log(L+(1<<k),R));
+	}	
 
 };
 
