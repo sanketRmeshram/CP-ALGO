@@ -8,8 +8,9 @@ struct segment_tree
 	void init(std::vector<int> b)
 	{
 		a=b;
-		t.assign(4*(n+10),0);
 		n=a.size();
+		t.assign(4*(n+10),0);
+		
 	}
 	int operation(int x,int y)
 	{
