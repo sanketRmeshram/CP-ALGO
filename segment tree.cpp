@@ -1,6 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
+#define boost ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);cin.exceptions(cin.failbit)
 
+ 
 struct segment_tree
 {
 	int n;
@@ -10,12 +12,11 @@ struct segment_tree
 		a=b;
 		n=a.size();
 		t.assign(4*(n+10),0);
-		
 	}
 	int operation(int x,int y)
 	{
 		return x+y;
-	}	
+	}
 	void build(int v,int left ,int right)
 	{
 		if(left==right)
@@ -28,13 +29,15 @@ struct segment_tree
 		build(2*v+1,mid+1,right);
 		t[v]=operation(t[2*v],t[2*v+1]);
 	}
-
+ 
 	int sum(int v, int tl, int tr, int l, int r) 
 	{
-		if (l > r)  return 0;
-		if (l == tl && r == tr) return t[v];
 
+		if (l == tl && r == tr) return t[v];
+ 
 		int tm = (tl + tr) / 2;
+		if(l>min(r, tm)) return sum(v*2+1, tm+1, tr, max(l, tm+1), r);
+		if(max(l, tm+1)> r) return sum(v*2, tl, tm, l, min(r, tm));
 		return operation (sum(v*2, tl, tm, l, min(r, tm))  , sum(v*2+1, tm+1, tr, max(l, tm+1), r));
 	}
 	void update(int v, int tl, int tr, int pos, int new_val) 
@@ -63,7 +66,10 @@ struct segment_tree
 	}
 }; 
 
+
 int main()
 {
+	boost;
+
 	return 0;
-}
+} 
